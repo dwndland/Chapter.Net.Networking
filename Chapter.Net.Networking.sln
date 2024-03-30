@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chapter.Net.Networking", "Chapter.Net.Networking\Chapter.Net.Networking.csproj", "{AC3B5C38-1AAC-455B-92A2-99907F9393E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBroadcastServer", "DemoBroadcastServer\DemoBroadcastServer.csproj", "{DA74C661-0C5F-415F-9BE0-AA0F36C2D051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBroadcastServer", "DemoBroadcastServer\DemoBroadcastServer.csproj", "{DA74C661-0C5F-415F-9BE0-AA0F36C2D051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBroadcastClient", "DemoBroadcastClient\DemoBroadcastClient.csproj", "{4E01D444-A617-4535-B260-A811D6355DDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBroadcastClient", "DemoBroadcastClient\DemoBroadcastClient.csproj", "{4E01D444-A617-4535-B260-A811D6355DDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

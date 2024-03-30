@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2024-03-30
+### Added
+- Added WebClient for easy calls to a web API include exception handling and authentication.
+### Supported .Net Versions
+- .Net 6
+- .Net 7
+- .Net 8
+
 ## [1.0.0] - 2023-12-23
 ### Added
 - Init project
