@@ -8,20 +8,21 @@ using System;
 using System.Net;
 using System.Net.Http;
 
-namespace Chapter.Net.Networking.Api;
-
-/// <inheritdoc />
-public class RequestExceptionToTimeoutHandler : IRequestExceptionHandler
+namespace Chapter.Net.Networking.Api
 {
     /// <inheritdoc />
-    public HttpResponseMessage Handle(HttpRequestException _)
+    public class RequestExceptionToTimeoutHandler : IRequestExceptionHandler
     {
-        return new HttpResponseMessage(HttpStatusCode.RequestTimeout);
-    }
+        /// <inheritdoc />
+        public HttpResponseMessage Handle(HttpRequestException _)
+        {
+            return new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+        }
 
-    /// <inheritdoc />
-    public HttpResponseMessage Handle(Exception _)
-    {
-        return new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+        /// <inheritdoc />
+        public HttpResponseMessage Handle(Exception _)
+        {
+            return new HttpResponseMessage(HttpStatusCode.RequestTimeout);
+        }
     }
 }

@@ -6,17 +6,21 @@
 
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 
-namespace Chapter.Net.Networking.Api;
-
-/// <inheritdoc />
-public class JsonDataFactory : IDataFactory
+namespace Chapter.Net.Networking.Api
 {
     /// <inheritdoc />
-    public virtual HttpContent GenerateHttpContent(object data)
+    public class JsonDataFactory : IDataFactory
     {
-        var jsonParameter = JsonSerializer.Serialize(data);
-        return new StringContent(jsonParameter, Encoding.UTF8, "application/json");
+        /// <inheritdoc />
+        public virtual HttpContent GenerateHttpContent(object data)
+        {
+#if NET451 || NETSTANDARD2_0
+            var jsonParameter = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+#else
+            var jsonParameter = System.Text.Json.JsonSerializer.Serialize(data);
+#endif
+            return new StringContent(jsonParameter, Encoding.UTF8, "application/json");
+        }
     }
 }

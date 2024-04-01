@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
-    <Version>1.1.0</Version>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.0;net451;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <Version>1.2.0</Version>
     <Authors>David Wendland</Authors>
     <Description>Chapter.Net.Networking provides methods and objects for a more easy network communication.</Description>
     <Copyright>Copyright (c) 2024 David Wendland</Copyright>
@@ -33,7 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Asp.Versioning.Http" Version="6.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.8" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.8" Condition="'$(TargetFramework)' == 'netcoreapp3.0'" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" Condition="'$(TargetFramework)' == 'net451'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.8" Condition="'$(TargetFramework)' == 'net451'" />
+    <PackageReference Include="Asp.Versioning.Http" Version="6.5.0" Condition="'$(TargetFramework)' == 'net5.0'" />
+    <PackageReference Include="Asp.Versioning.Http" Version="6.5.0" Condition="'$(TargetFramework)' == 'net6.0'" />
+    <PackageReference Include="Asp.Versioning.Http" Version="7.1.0" Condition="'$(TargetFramework)' == 'net7.0'" />
+    <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" Condition="'$(TargetFramework)' == 'net8.0'" />
   </ItemGroup>
 
 </Project>
