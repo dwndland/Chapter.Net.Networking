@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Supported .Net Versions
 - .Net Standard 2.0
 - .Net Core 3.0
-- .Net Framework 4.5.1
+- .Net Framework 4.5
 - .Net 5
 - .Net 6
 - .Net 7

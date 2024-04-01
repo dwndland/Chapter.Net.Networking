@@ -171,7 +171,7 @@ namespace Chapter.Net.Networking.Api
             }
         }
 
-#if !NET451 && !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NET45
         /// <inheritdoc />
         public async Task<HttpResponseMessage> PatchAsync(string route)
         {
@@ -222,7 +222,7 @@ namespace Chapter.Net.Networking.Api
         public async Task<T> AsAsync<T>(HttpResponseMessage result)
         {
             var resultJson = await result.Content.ReadAsStringAsync();
-#if NET451 || NETSTANDARD2_0
+#if NETSTANDARD2_0 || NET45
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(resultJson);
 #else
             return System.Text.Json.JsonSerializer.Deserialize<T>(resultJson, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });

@@ -15,7 +15,7 @@ namespace Chapter.Net.Networking.Api
         /// <inheritdoc />
         public virtual HttpContent GenerateHttpContent(object data)
         {
-#if NET451 || NETSTANDARD2_0
+#if NETSTANDARD2_0 || NET45
             var jsonParameter = Newtonsoft.Json.JsonConvert.SerializeObject(data);
 #else
             var jsonParameter = System.Text.Json.JsonSerializer.Serialize(data);

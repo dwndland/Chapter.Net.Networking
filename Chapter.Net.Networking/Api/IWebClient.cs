@@ -58,7 +58,7 @@ namespace Chapter.Net.Networking.Api
         /// <returns>The http get return value.</returns>
         Task<HttpResponseMessage> PostAsync(string route, object parameter);
 
-#if !NET451 && !NETSTANDARD2_0
+#if !NETSTANDARD2_0 && !NET45
         /// <summary>
         ///     Executes http patch without a parameter.
         /// </summary>
