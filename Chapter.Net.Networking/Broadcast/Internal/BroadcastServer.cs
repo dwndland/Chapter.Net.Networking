@@ -11,88 +11,87 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Chapter.Net.Networking.Broadcast.Internal
+namespace Chapter.Net.Networking.Broadcast.Internal;
+
+internal sealed class BroadcastServer : IDisposable
 {
-    internal sealed class BroadcastServer : IDisposable
+    private UdpClient _server;
+    private CancellationTokenSource _tokenSource;
+
+    public void Dispose()
     {
-        private UdpClient _server;
-        private CancellationTokenSource _tokenSource;
+        _server.Close();
+        _tokenSource.Cancel();
+    }
 
-        public void Dispose()
+    internal event EventHandler<ClientMessageReceivingEventArgs> ClientMessageReceiving;
+
+    internal event EventHandler<ClientMessageReceivedEventArgs> ClientMessageReceived;
+
+    internal void Run(ServerConfiguration configuration)
+    {
+        _tokenSource = new CancellationTokenSource();
+        var cancelToken = _tokenSource.Token;
+
+        Task.Run(() =>
         {
-            _server.Close();
-            _tokenSource.Cancel();
-        }
+            _server = new UdpClient(configuration.Port);
+            var response = Encoding.ASCII.GetBytes(configuration.ResponseMessage);
 
-        internal event EventHandler<ClientMessageReceivingEventArgs> ClientMessageReceiving;
+            while (true)
+                try
+                {
+                    var client = new IPEndPoint(IPAddress.Any, 0);
 
-        internal event EventHandler<ClientMessageReceivedEventArgs> ClientMessageReceived;
+                    if (cancelToken.IsCancellationRequested)
+                        cancelToken.ThrowIfCancellationRequested();
 
-        internal void Run(ServerConfiguration configuration)
-        {
-            _tokenSource = new CancellationTokenSource();
-            var cancelToken = _tokenSource.Token;
+                    var messageData = _server.Receive(ref client);
 
-            Task.Run(() =>
-            {
-                _server = new UdpClient(configuration.Port);
-                var response = Encoding.ASCII.GetBytes(configuration.ResponseMessage);
+                    if (cancelToken.IsCancellationRequested)
+                        cancelToken.ThrowIfCancellationRequested();
 
-                while (true)
-                    try
+                    var message = Encoding.ASCII.GetString(messageData);
+
+                    OnClientMessageReceiving(client.Address, message, configuration);
+
+                    if (configuration.Filter(message))
                     {
-                        var client = new IPEndPoint(IPAddress.Any, 0);
-
-                        if (cancelToken.IsCancellationRequested)
-                            cancelToken.ThrowIfCancellationRequested();
-
-                        var messageData = _server.Receive(ref client);
-
-                        if (cancelToken.IsCancellationRequested)
-                            cancelToken.ThrowIfCancellationRequested();
-
-                        var message = Encoding.ASCII.GetString(messageData);
-
-                        OnClientMessageReceiving(client.Address, message, configuration);
-
-                        if (configuration.Filter(message))
-                        {
-                            OnClientMessageReceived(client.Address, message, configuration);
-                            _server.Send(response, response.Length, client);
-                        }
+                        OnClientMessageReceived(client.Address, message, configuration);
+                        _server.Send(response, response.Length, client);
                     }
-                    catch (ObjectDisposedException)
-                    {
-                        //_server.Close which cancels the _server.Receive
-                        _tokenSource.Dispose();
-                        break;
-                    }
-                    catch (SocketException)
-                    {
-                        //_server.Close which cancels the _server.Receive
-                        _tokenSource.Dispose();
-                        break;
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        _tokenSource.Dispose();
-                        break;
-                    }
-                    catch
-                    {
-                        // any other error, retry
-                    }
-            }, cancelToken);
-        }
+                }
+                catch (ObjectDisposedException)
+                {
+                    //_server.Close which cancels the _server.Receive
+                    _tokenSource.Dispose();
+                    break;
+                }
+                catch (SocketException)
+                {
+                    //_server.Close which cancels the _server.Receive
+                    _tokenSource.Dispose();
+                    break;
+                }
+                catch (OperationCanceledException)
+                {
+                    _tokenSource.Dispose();
+                    break;
+                }
+                catch
+                {
+                    // any other error, retry
+                }
+        }, cancelToken);
+    }
 
-        private void OnClientMessageReceiving(IPAddress address, string message, ServerConfiguration configuration)
-        {
-            ClientMessageReceiving?.Invoke(this, new ClientMessageReceivingEventArgs(address, message, configuration));
-        }
+    private void OnClientMessageReceiving(IPAddress address, string message, ServerConfiguration configuration)
+    {
+        ClientMessageReceiving?.Invoke(this, new ClientMessageReceivingEventArgs(address, message, configuration));
+    }
 
-        private void OnClientMessageReceived(IPAddress address, string message, ServerConfiguration configuration)
-        {
-            ClientMessageReceived?.Invoke(this, new ClientMessageReceivedEventArgs(address, message, configuration));
-        }
+    private void OnClientMessageReceived(IPAddress address, string message, ServerConfiguration configuration)
+    {
+        ClientMessageReceived?.Invoke(this, new ClientMessageReceivedEventArgs(address, message, configuration));
     }
 }

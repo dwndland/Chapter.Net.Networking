@@ -7,21 +7,20 @@
 using System;
 using System.Net.Http;
 
-namespace Chapter.Net.Networking.Api
+namespace Chapter.Net.Networking.Api;
+
+/// <inheritdoc />
+public class RequestExceptionThrowHandler : IRequestExceptionHandler
 {
     /// <inheritdoc />
-    public class RequestExceptionThrowHandler : IRequestExceptionHandler
+    public HttpResponseMessage Handle(HttpRequestException ex)
     {
-        /// <inheritdoc />
-        public HttpResponseMessage Handle(HttpRequestException ex)
-        {
-            throw ex;
-        }
+        throw ex;
+    }
 
-        /// <inheritdoc />
-        public HttpResponseMessage Handle(Exception ex)
-        {
-            throw ex;
-        }
+    /// <inheritdoc />
+    public HttpResponseMessage Handle(Exception ex)
+    {
+        throw ex;
     }
 }
