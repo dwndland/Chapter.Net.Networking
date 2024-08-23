@@ -6,7 +6,7 @@
     <Authors>David Wendland</Authors>
     <Description>Chapter.Net.Networking provides methods and objects for a more easy network communication.</Description>
     <Copyright>Copyright (c) 2024 David Wendland</Copyright>
-    <PackageProjectUrl>https://github.com/dwndlnd/Chapter.Net.Networking</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/dwndland/Chapter.Net.Networking</PackageProjectUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
