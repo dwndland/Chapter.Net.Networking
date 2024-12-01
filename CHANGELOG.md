@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2024-12-01
+### Added
+- Added .net 9 to the supported .net versions.
+### Supported .Net Versions
+- .Net 8
+- .Net 9
+
 ## [2.0.0] - 2024-06-07
 ### Changed
 - Update to support .Net 8 only.
