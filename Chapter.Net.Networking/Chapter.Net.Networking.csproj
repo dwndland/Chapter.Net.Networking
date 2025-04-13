@@ -4,8 +4,8 @@
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <Version>2.1.0</Version>
     <Authors>David Wendland</Authors>
-    <Description>Chapter.Net.Networking provides methods and objects for a more easy network communication.</Description>
-    <Copyright>Copyright (c) 2024 David Wendland</Copyright>
+    <Description>Chapter.Net.Networking is a utility library that provides helpers for creating HTTP web clients and building broadcasting services for network communication in .NET applications.</Description>
+    <Copyright>Copyright (c) 2025 David Wendland</Copyright>
     <PackageProjectUrl>https://github.com/dwndland/Chapter.Net.Networking</PackageProjectUrl>
     <PackageIcon>Icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>

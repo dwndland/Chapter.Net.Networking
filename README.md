@@ -3,7 +3,7 @@
 # Chapter.Net.Networking Library
 
 ## Overview
-Chapter.Net.Networking provides methods and objects for a more easy network communication.
+Chapter.Net.Networking is a utility library that provides helpers for creating HTTP web clients and building broadcasting services for network communication in .NET applications.
 
 ## Features
 - **[LocalOnly] attribute:** Mark a API callback method as allowed to be called local only.
