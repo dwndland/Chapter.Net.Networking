@@ -119,14 +119,14 @@ That is to use if the token is handled manually from outside or the web API has 
 
 #### WebClient Examples
 A. Send data to a web API without Authentication and json only.
-    ```csharp
+```csharp
     public class Book
     {
         public string Author { get; set; }
         public string Name { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class BooksService
     {
         private WebClient _client;
@@ -147,17 +147,17 @@ A. Send data to a web API without Authentication and json only.
             await _client.PostAsync("api/v1/books", book);
         }
     }
-    ```
+```
 
 B. Receive data from the web API without Authentication and json only.
-    ```csharp
+```csharp
     public class Book
     {
         public string Author { get; set; }
         public string Name { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class BooksService
     {
         private WebClient _client;
@@ -179,10 +179,10 @@ B. Receive data from the web API without Authentication and json only.
             return await _client.AsAsync<List<Book>>(result);
         }
     }
-    ```
+```
 
 C. Send a file to a web API using Multipart.
-    ```csharp
+```csharp
     public class FileUploadRequest
     {
         public string FilePath { get; set; }
@@ -193,8 +193,8 @@ C. Send a file to a web API using Multipart.
             MetaData.Add(Tuple.Create(key, value));
         }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class MyDataFactory : JsonDataFactory
     {
         public override HttpContent GenerateHttpContent(object data)
@@ -215,8 +215,8 @@ C. Send a file to a web API using Multipart.
             return multiPart;
         }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class FilesService
     {
         private WebClient _client;
@@ -244,10 +244,10 @@ C. Send a file to a web API using Multipart.
             return result.IsSuccessStatusCode;
         }
     }
-    ```
+```
 
 D. Receive a file from a web API using Multipart.
-    ```csharp
+```csharp
     public class FilesService
     {
         private WebClient _client;
@@ -278,31 +278,31 @@ D. Receive a file from a web API using Multipart.
             }
         }
     }
-    ```
+```
 
 E. Auto token refresh with call repeat
-    ```csharp
+```csharp
     public class Book
     {
         public string Author { get; set; }
         public string Name { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class LoginRequest
     {
         public string Username { get; set; }
         public string Password { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class LoginResult
     {
         public string Token { get; set; }
         public string RepeatToken { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class JwtBearerTokenHandler : ITokenHandler
     {
         private string _token;
@@ -350,8 +350,8 @@ E. Auto token refresh with call repeat
             _refreshToken = result.RepeatToken;
         }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class BooksService
     {
         private JwtBearerTokenHandler _tokenHandler;
@@ -388,31 +388,31 @@ E. Auto token refresh with call repeat
             return await _client.AsAsync<List<Book>>(result);
         }
     }
-    ```
+```
 
-f. Manual token refresh by click
-    ```csharp
+F. Manual token refresh by click
+```csharp
     public class Book
     {
         public string Author { get; set; }
         public string Name { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class LoginRequest
     {
         public string Username { get; set; }
         public string Password { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class LoginResult
     {
         public string Token { get; set; }
         public string RepeatToken { get; set; }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class JwtBearerTokenHandler : ITokenHandler
     {
         private string _token;
@@ -449,8 +449,8 @@ f. Manual token refresh by click
             };
         }
     }
-    ```
-    ```csharp
+```
+```csharp
     public class BooksService
     {
         private JwtBearerTokenHandler _tokenHandler;
@@ -499,7 +499,7 @@ f. Manual token refresh by click
             return await _client.AsAsync<List<Book>>(result);
         }
     }
-    ```
+```
 
 ## Links
 * [NuGet](https://www.nuget.org/packages/Chapter.Net.Networking)
